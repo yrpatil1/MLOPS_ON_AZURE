@@ -1,14 +1,12 @@
-# Azure MLOps Talk
 
-(https://www.youtube.com/watch?v=pLd7xF0z5Zs)
 
 # Introduction 
 Fully Automated end-to-end Training and Deployment of IRIS Classifer using Azure MLOps
 # Prerequisites
-1. Azure [Account] (https://azure.microsoft.com/en-in/free/search/?&ef_id=EAIaIQobChMIhIHs3_Ca7wIVI4ZLBR0yKQsDEAAYASAAEgLhFvD_BwE:G:s&OCID=AID2100054_SEM_EAIaIQobChMIhIHs3_Ca7wIVI4ZLBR0yKQsDEAAYASAAEgLhFvD_BwE:G:s)
-2. Understanding of [Azure DevOps](https://azure.microsoft.com/en-in/services/devops/)
+1. Azure Account
+2. Understanding of Azure DevOps
 # Getting Started
-1.	Read more about [Azure MLOps](https://azure.microsoft.com/en-in/services/machine-learning/mlops/)
+	Read more about Azure MLOps (https://azure.microsoft.com/en-in/services/machine-learning/mlops/)
 
 # Azure DevOps Instructions
 1. Create a Code Repo/Link git repos
