@@ -12,15 +12,15 @@ az extension add -n azure-cli-ml
 
 Create/Use ML Workspace
 ----------------------
-az ml workspace create -g $(ml.resourceGroup) -w $(ml.workspace) -l $(ml.region) --exist-ok --yes
+az ml workspace create -g $(mlresourcegroup) -w $(mlworkspace) -l $(mlregion) --exist-ok --yes
 
 Create/Use Compute Target
 --------------------------
-az ml computetarget create amlcompute -g $(ml.resourceGroup) -w $(ml.workspace) -n $(ml.computeName) -s $(ml.computeVMSize) --min-nodes $(ml.computeMinNodes) --max-nodes $(ml.computeMaxNodes) --idle-seconds-before-scaledown $(ml.computeIdleSecs) 
+az ml computetarget create amlcompute -g $(mlresourcegroup) -w $(mlworkspace) -n $(mlcomputeName) -s $(mlcomputeVMSize) --min-nodes $(mlcomputeMinNodes) --max-nodes $(mlcomputeMaxNodes) --idle-seconds-before-scaledown $(mlcomputeIdleSecs) 
 
 Upload Data to Blobstore
 --------------------------
-az ml datastore upload -w $(ml.workspace) -g $(ml.resourceGroup) -n $(az ml datastore show-default -w $(ml.workspace) -g $(ml.resourceGroup) --query name -o tsv) -p data -u irisdata
+az ml datastore upload -w $(mlworkspace) -g $(mlresourcegroup) -n $(az ml datastore show-default -w $(mlworkspace) -g $(mlresourcegroup) --query name -o tsv) -p data -u irisdata
 
 Create Metadata & Model folders
 -------------------------------
@@ -28,11 +28,11 @@ mkdir metadata && mkdir models
 
 IRIS Training
 -------------
-az ml run submit-script -g $(ml.resourceGroup) -w $(ml.workspace) -e $(ml.experimentName) --ct $(ml.computeName) -c iris_training --source-directory . --path environment_setup -t ./metadata/run.json iris_training.py --container_name irisdata --input_csv Iris.csv --model_path ./models/iris_model.pkl --artifact_loc ./outputs/models/ --dataset_name iris_ds --dataset_desc "IRIS Data Set"
+az ml run submit-script -g $(mlresourcegroup) -w $(mlworkspace) -e $(mlexperimentName) --ct $(mlcomputeName) -c iris_training --source-directory . --path environment_setup -t ./metadata/run.json iris_training.py --container_name irisdata --input_csv Iris.csv --model_path ./models/iris_model.pkl --artifact_loc ./outputs/models/ --dataset_name iris_ds --dataset_desc "IRIS Data Set"
 
 Register Model in to Model Registry
 ------------------------------------
-az ml model register -g $(ml.resourceGroup) -w $(ml.workspace) -n IRIS --asset-path outputs/models/ -d "IRIS Decision Tree Classifier" --tag "model"="Decision Tree"  --model-framework Custom -f ./metadata/run.json -t metadata/model.json
+az ml model register -g $(mlresourcegroup) -w $(mlworkspace) -n IRIS --asset-path outputs/models/ -d "IRIS Decision Tree Classifier" --tag "model"="Decision Tree"  --model-framework Custom -f ./metadata/run.json -t metadata/model.json
 
 Copy File to Pipeline Artifact
 -------------------------------
